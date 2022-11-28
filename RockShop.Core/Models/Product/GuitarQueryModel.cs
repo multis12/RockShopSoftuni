@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RockShop.Core.Models.Product
 {
-    public class ProductModel
+    public class GuitarQueryModel
     {
     }
 }

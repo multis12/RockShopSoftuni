@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Authorization;
 namespace RockShop.Controllers
 {
     [Authorize]
-    public class ProductController : Controller
+    public class GuitarController : Controller
     {
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-            var model = new ProductsQueryModel();
+            var model = new GuitarQueryModel();
 
             return View(model);
         }
@@ -18,7 +18,7 @@ namespace RockShop.Controllers
         
         public async Task<IActionResult> ShoppingCart()
         {
-            var model = new ProductsQueryModel();
+            var model = new GuitarQueryModel();
 
             return View(model);
         }
@@ -26,7 +26,7 @@ namespace RockShop.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var model = new ProductDetailsModel();
+            var model = new GuitarDetailsModel();
 
             return View(model);
         }
@@ -40,7 +40,7 @@ namespace RockShop.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> Add(ProductModel model)
+        public async Task<IActionResult> Add(GuitarModel model)
         {
             int id = 1;
 
@@ -50,19 +50,19 @@ namespace RockShop.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var model = new ProductModel();
+            var model = new GuitarModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, ProductModel model)
+        public async Task<IActionResult> Edit(int id, GuitarModel model)
         {
             return RedirectToAction(nameof(Details), new { id });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id, ProductModel model)
+        public async Task<IActionResult> Delete(int id, GuitarModel model)
         {
             return RedirectToAction(nameof(All), new { id });
         }

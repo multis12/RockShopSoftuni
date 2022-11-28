@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RockShop.Core.Contracts;
 using RockShop.Models;
 using System.Diagnostics;
 
@@ -6,10 +7,16 @@ namespace RockShop.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IGuitarService guitarService;
 
-        public IActionResult Index()
+        public HomeController(IGuitarService _guitarService)
         {
-            return View();
+            guitarService = _guitarService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var model = await guitarService.LastSevenGuitars();
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

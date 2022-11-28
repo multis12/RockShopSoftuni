@@ -1,4 +1,6 @@
-﻿using RockShop.Infrastructure.Data.Common;
+﻿using RockShop.Core.Contracts;
+using RockShop.Core.Services;
+using RockShop.Infrastructure.Data.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -7,6 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IGuitarService, GuitarService>();
 
             return services;
         }

@@ -17,7 +17,7 @@ namespace RockShop.Infrastructure.Data
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new TypeConfiguration());
             builder.ApplyConfiguration(new GuitarConfiguration());
-            builder.ApplyConfiguration(new AdminConfiguration());
+            builder.ApplyConfiguration(new StaffConfiguration());
 
             base.OnModelCreating(builder);
         }
@@ -28,6 +28,6 @@ namespace RockShop.Infrastructure.Data
 
         public DbSet<Type> Types { get; set; } = null!;
 
-        public DbSet<Admin> Admins { get; set; } = null!;
+        public DbSet<Staff> Staffs { get; set; } = null!;
     }
 }

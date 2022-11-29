@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RockShop.Core.Models.Admin
 {
-    public class BecomeAdminModel
+    public class BecomeStaffModel
     {
     }
 }

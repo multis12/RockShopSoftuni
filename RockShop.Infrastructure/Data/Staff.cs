@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RockShop.Infrastructure.Data
 {
-    public class Admin
+    public class Staff
     {
         [Key]
         public int Id { get; set; }

@@ -14,7 +14,7 @@ namespace RockShop.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Become(BecomeAdminModel model)
+        public async Task<IActionResult> Become(BecomeStaffModel model)
         {
             return RedirectToAction("All", "Product"); 
         }

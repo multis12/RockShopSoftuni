@@ -12,6 +12,10 @@ namespace RockShop.Infrastructure.Data
         [Required]
         public string UserId { get; set; } = null!;
 
+        [Required]
+        [StringLength(15)]
+        public string PhoneNumber { get; set; } = null!;
+
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
     }

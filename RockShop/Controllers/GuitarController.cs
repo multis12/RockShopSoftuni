@@ -1,12 +1,20 @@
-﻿using RockShop.Core.Models.Product;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+using RockShop.Core.Contracts;
+using RockShop.Core.Models.Product;
 
 namespace RockShop.Controllers
 {
     [Authorize]
     public class GuitarController : Controller
     {
+
+        private readonly IGuitarService guitarService;
+
+        public GuitarController(IGuitarService _guitarService)
+        {
+            guitarService = _guitarService;
+        }
         [AllowAnonymous]
         public async Task<IActionResult> All()
         {

@@ -26,7 +26,6 @@ namespace RockShop.Infrastructure.Data.Configuration
                     Adapters = "Humbucker",
                     TypeId = 2,
                     CategoryId = 1,
-                    Instock = true,
                     Price = 528.00M,
                     ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091545_8612_i.webp"
                 },
@@ -43,7 +42,6 @@ namespace RockShop.Infrastructure.Data.Configuration
                     Adapters = "EMG® 85",
                     TypeId = 2,
                     CategoryId = 1,
-                    Instock = true,
                     Price = 1721.00M,
                     ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091523_6553_i.webp"
                 },
@@ -60,7 +58,6 @@ namespace RockShop.Infrastructure.Data.Configuration
                     Adapters = "None",
                     TypeId = 1,
                     CategoryId = 1,
-                    Instock = true,
                     Price = 548.00M,
                     ImageUrl = "https://rockshock.eu/uploads/2022/04/12/1649751909_0387_i.webp"
                 }

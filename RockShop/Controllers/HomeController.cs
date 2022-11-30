@@ -9,9 +9,13 @@ namespace RockShop.Controllers
     {
         private readonly IGuitarService guitarService;
 
-        public HomeController(IGuitarService _guitarService)
+        private readonly IStaffService staffService;
+
+        public HomeController(IGuitarService _guitarService
+                            , IStaffService _staffService)
         {
             guitarService = _guitarService;
+            staffService = _staffService;
         }
         public async Task<IActionResult> Index()
         {

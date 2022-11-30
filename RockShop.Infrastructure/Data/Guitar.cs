@@ -49,9 +49,6 @@ namespace RockShop.Infrastructure.Data
         public Category Category { get; set; } = null!;
 
         [Required]
-        public bool Instock { get; set; }
-
-        [Required]
         [Column(TypeName = "money")]
         [Precision(18,2)]
         public decimal Price { get; set; }

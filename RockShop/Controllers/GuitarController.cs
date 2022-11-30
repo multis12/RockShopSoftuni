@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using RockShop.Core.Contracts;
 using RockShop.Core.Models.Product;
+using RockShop.Core.Services;
+using RockShop.Extensions;
 
 namespace RockShop.Controllers
 {
@@ -10,10 +12,13 @@ namespace RockShop.Controllers
     {
 
         private readonly IGuitarService guitarService;
+        private readonly IStaffService staffService;
 
-        public GuitarController(IGuitarService _guitarService)
+        public GuitarController(IGuitarService _guitarService
+                               ,IStaffService _staffService)
         {
             guitarService = _guitarService;
+            staffService = _staffService;
         }
         [AllowAnonymous]
         public async Task<IActionResult> All()
@@ -41,16 +46,49 @@ namespace RockShop.Controllers
 
         
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
-            return View();
+            if ((await staffService.ExistsById(User.Id())) == false)
+            {
+                return RedirectToAction(nameof(StaffController.Become), "Staff");
+            }
+
+            var model = new GuitarModel()
+            {
+                Categories = await guitarService.AllCategories(),
+                Types = await guitarService.AllTypes()
+            };
+
+
+
+            return View(model);
         }
 
         
         [HttpPost]
         public async Task<IActionResult> Add(GuitarModel model)
         {
-            int id = 1;
+            if ((await staffService.ExistsById(User.Id())) == false)
+            {
+                return RedirectToAction(nameof(StaffController.Become), "Staff");
+            }
+            if ((await guitarService.CategoryExists(model.CategoryId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.CategoryId), "Category does not exists");
+            }
+            if ((await guitarService.TypeExists(model.TypeId)) == false)
+            {
+                ModelState.AddModelError(nameof(model.TypeId), "Type does not exists");
+            }
+            if (!ModelState.IsValid)
+            {
+                model.Categories = await guitarService.AllCategories();
+                model.Types = await guitarService.AllTypes();
+
+                return View(model);
+            }
+
+            int id = await guitarService.Create(model);
 
             return RedirectToAction(nameof(Details), new { id });
         }

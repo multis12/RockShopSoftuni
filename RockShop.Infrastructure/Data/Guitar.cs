@@ -59,5 +59,7 @@ namespace RockShop.Infrastructure.Data
         [Required]
         [StringLength(200)]
         public string ImageUrl { get; set; } = null!;
+
+        
     }
 }

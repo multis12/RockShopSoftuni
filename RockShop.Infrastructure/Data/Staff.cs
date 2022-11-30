@@ -16,6 +16,9 @@ namespace RockShop.Infrastructure.Data
         [StringLength(15)]
         public string PhoneNumber { get; set; } = null!;
 
+        
+        public IEnumerable<Guitar>? Guitars { get; set; }
+
         [ForeignKey(nameof(UserId))]
         public IdentityUser User { get; set; } = null!;
     }

@@ -26,14 +26,32 @@ namespace RockShop.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-
-            return View();
+            var model = new BecomeStaffModel();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Become(BecomeStaffModel model)
         {
-            return RedirectToAction("All", "Product"); 
+            var userId = User.Id();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (await staffService.ExistsById(userId))
+            {
+                TempData[MessageConstants.ErrorMessage] = "You are already a part of our staff";
+
+                return RedirectToAction("Index", "Home");
+            }
+            if (await staffService.UserWithPhoneNumberExists(model.PhoneNumber))
+            {
+                TempData[MessageConstants.ErrorMessage] = "Phone number already exists";
+            }
+
+            await staffService.Create(userId, model.PhoneNumber);
+            return RedirectToAction("All", "Guitar"); 
         }
     }
 }

@@ -14,9 +14,15 @@ namespace RockShop.Core.Services
             repo = _repo;
         }
 
-        public Task Create(string userId, string phoneNumber)
+        public async Task Create(string userId, string phoneNumber)
         {
-            throw new NotImplementedException();
+            var staff = new Staff()
+            {
+                UserId = userId,
+                PhoneNumber = phoneNumber
+            };
+            await repo.AddAsync(staff);
+            await repo.SaveChangesAsync();
         }
 
         public async Task<bool> ExistsById(string userId)
@@ -24,14 +30,15 @@ namespace RockShop.Core.Services
             return await repo.All<Staff>().AnyAsync(a => a.UserId == userId);
         }
 
-        public Task<bool> UserHasGuitar(string userId)
-        {
-            throw new NotImplementedException();
-        }
+        //TODO: IMPLEMENT SHOPPING CART!
+        //public Task<bool> UserHasGuitar(string userId)
+        //{
+        //    return await repo.All<Staff>().AnyAsync(a => a.R == phoneNumber); 
+        //}
 
-        public Task<bool> UserWithPhoneNumberExists(string phoneNumber)
+        public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
         {
-            throw new NotImplementedException();
+            return await repo.All<Staff>().AnyAsync(a => a.PhoneNumber == phoneNumber);
         }
     }
 }

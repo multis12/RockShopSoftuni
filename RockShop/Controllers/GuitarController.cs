@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RockShop.Core.Contracts;
-using RockShop.Core.Models.Product;
+using RockShop.Core.Models.Guitar;
 using RockShop.Core.Services;
 using RockShop.Extensions;
 
@@ -21,11 +21,20 @@ namespace RockShop.Controllers
             staffService = _staffService;
         }
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllGuitarsQueryModel query)
         {
-            var model = new GuitarQueryModel();
+            var result = await guitarService.All(
+                query.Category,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllGuitarsQueryModel.GuitarsPerPage);
 
-            return View(model);
+            query.TotalGuitarsCount = result.TotalGuitarsCount;
+            query.Categories = await guitarService.AllCategoriesNames();
+            query.Guitars = result.Guitars;
+
+            return View(query);
         }
 
         

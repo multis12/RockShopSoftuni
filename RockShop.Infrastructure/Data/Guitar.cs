@@ -54,6 +54,9 @@ namespace RockShop.Infrastructure.Data
         public decimal Price { get; set; }
 
         [Required]
+        public bool InStock { get; set; }
+
+        [Required]
         [StringLength(200)]
         public string ImageUrl { get; set; } = null!;
 

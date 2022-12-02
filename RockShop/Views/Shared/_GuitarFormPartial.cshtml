@@ -34,6 +34,11 @@
                 <input asp-for="Frets" class="form-control" placeholder="Frets...">
                 <span asp-validation-for="Frets" class="small text-danger"></span>
             </div>
+            <div class="form-check-label">
+                <label asp-for="InStock"></label>
+                <input asp-for="InStock" class="form-check-input" placeholder="InStock...">
+                <span asp-validation-for="InStock" class="small text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Description"></label>
                 <textarea asp-for="Description" rows="4" class="form-control" placeholder="Two bedrooms..."></textarea>

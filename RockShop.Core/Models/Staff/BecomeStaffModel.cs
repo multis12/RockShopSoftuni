@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RockShop.Core.Models.Admin
+namespace RockShop.Core.Models.Staff
 {
     public class BecomeStaffModel
     {

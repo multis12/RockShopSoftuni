@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RockShop.Core.Contracts;
-using RockShop.Core.Models.Product;
+using RockShop.Core.Models.Guitar;
 using RockShop.Infrastructure.Data;
 using RockShop.Infrastructure.Data.Common;
 using Type = RockShop.Infrastructure.Data.Type;
@@ -63,6 +63,7 @@ namespace RockShop.Core.Services
                 TypeId = model.TypeId,
                 Neck = model.Neck,
                 Body = model.Body,
+                InStock = model.InStock,
                 Bridge = model.Bridge,
                 Frets = model.Frets,
                 Adapters = model.Adapters,
@@ -78,14 +79,75 @@ namespace RockShop.Core.Services
         public async Task<IEnumerable<GuitarIndexModel>> LastSevenGuitars()
         {
             return await repo.AllReadonly<Guitar>()
-                .OrderByDescending(h => h.Id)
-                .Select(h => new GuitarIndexModel()
+                .OrderByDescending(g => g.Id)
+                .Select(g => new GuitarIndexModel()
                 {
-                    Id = h.Id,
-                    ImageUrl = h.ImageUrl,
-                    Name = h.Name
+                    Id = g.Id,
+                    ImageUrl = g.ImageUrl,
+                    Name = g.Name
                 })
                 .Take(7)
+                .ToListAsync();
+        }
+
+        public async Task<GuitarQueryModel> All(string? category = null, string? searchTerm = null, GuitarSorting sorting = GuitarSorting.Newest, int currentPage = 1, int guitarsPerPage = 1)
+        {
+            var result = new GuitarQueryModel();
+            var guitars = repo.AllReadonly<Guitar>();
+
+            if (string.IsNullOrEmpty(category) == false)
+            {
+                guitars = guitars.Where(g => g.Category.Name == category);
+            }
+
+            if (string.IsNullOrEmpty(searchTerm) == false)
+            {
+                searchTerm = $"%{searchTerm.ToLower()}%";
+
+                guitars = guitars.Where(g => EF.Functions.Like(g.Name, searchTerm) ||
+                                    EF.Functions.Like(g.Description, searchTerm));
+            }
+
+            guitars = sorting switch
+            {
+                GuitarSorting.Price => guitars
+                .OrderBy(g => g.Price),
+                GuitarSorting.InStockFirst => guitars
+                .OrderBy(g => g.InStock),
+                _ => guitars.OrderByDescending(g => g.Id)
+            };
+
+            result.Guitars = await guitars
+                .Skip((currentPage - 1) * guitarsPerPage)
+                .Take(guitarsPerPage)
+                .Select(g => new GuitarServiceModel()
+                {
+                    Id = g.Id,
+                    ImageUrl = g.ImageUrl,
+                    Price = g.Price,
+                    InStock = g.InStock,
+                    Name = g.Name
+                })
+                .ToListAsync();
+
+            result.TotalGuitarsCount = await guitars.CountAsync();
+
+            return result;
+        }
+
+        public async Task<IEnumerable<string>> AllCategoriesNames()
+        {
+            return await repo.AllReadonly<Category>()
+                .Select(c => c.Name)
+                .Distinct()
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<string>> AllTypesNames()
+        {
+            return await repo.AllReadonly<Type>()
+                .Select(t => t.Name)
+                .Distinct()
                 .ToListAsync();
         }
     }

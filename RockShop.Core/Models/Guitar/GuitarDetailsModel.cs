@@ -1,4 +1,4 @@
-﻿namespace RockShop.Core.Models.Product
+﻿namespace RockShop.Core.Models.Guitar
 {
     public class GuitarDetailsModel
     {

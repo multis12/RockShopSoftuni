@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RockShop.Core.Constants;
 using RockShop.Core.Contracts;
-using RockShop.Core.Models.Admin;
+using RockShop.Core.Models.Staff;
 using RockShop.Extensions;
 
 namespace RockShop.Controllers

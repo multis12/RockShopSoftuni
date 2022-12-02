@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RockShop.Core.Models.Product
+namespace RockShop.Core.Models.Guitar
 {
     public class GuitarModel
     {
@@ -32,6 +32,10 @@ namespace RockShop.Core.Models.Product
         [Required]
         [StringLength(60)]
         public string Adapters { get; set; } = null!;
+
+        [Required]
+        [Display(Name = "In Stock")]
+        public bool InStock { get; set; }
 
         [Required]
         [Display(Name = "Price")]

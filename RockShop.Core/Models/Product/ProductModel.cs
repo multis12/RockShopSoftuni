@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RockShop.Core.Models.Guitar
+namespace RockShop.Core.Models.Product
 {
-    public class GuitarModel
+    public class ProductModel
     {
         public int Id { get; set; }
 
@@ -14,24 +14,24 @@ namespace RockShop.Core.Models.Guitar
         [StringLength(2000)]
         public string Description { get; set; } = null!;
 
-        [Required]
         [StringLength(100)]
-        public string Neck { get; set; } = null!;
+        public string? Neck { get; set; }
 
-        [Required]
         [StringLength(60)]
-        public string Body { get; set; } = null!;
+        public string? Body { get; set; }
 
-        [Required]
         [StringLength(50)]
-        public string Bridge { get; set; } = null!;
+        public string? Bridge { get; set; }
 
-        [Required]
-        public int Frets { get; set; }
+        [StringLength(50)]
+        public string? Tune { get; set; }
 
-        [Required]
+        public int? Holes { get; set; }
+
+        public int? Frets { get; set; }
+
         [StringLength(60)]
-        public string Adapters { get; set; } = null!;
+        public string? Adapters { get; set; }
 
         [Required]
         [Display(Name = "In Stock")]
@@ -48,13 +48,13 @@ namespace RockShop.Core.Models.Guitar
         public string ImageUrl { get; set; } = null!;
 
         [Display(Name = "Type")]
-        public int TypeId { get; set; }
+        public int? TypeId { get; set; }
 
-        public IEnumerable<GuitarTypeModel> Types { get; set; } = new List<GuitarTypeModel>();
+        public IEnumerable<ProductTypeModel> Types { get; set; } = new List<ProductTypeModel>();
 
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
-        public IEnumerable<GuitarCategoryModel> Categories { get; set; } = new List<GuitarCategoryModel>();
+        public IEnumerable<ProductCategoryModel> Categories { get; set; } = new List<ProductCategoryModel>();
     }
 }

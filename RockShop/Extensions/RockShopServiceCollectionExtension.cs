@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IRepository, Repository>();
-            services.AddScoped<IGuitarService, GuitarService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IStaffService, StaffService>();
 
             return services;

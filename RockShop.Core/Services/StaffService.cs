@@ -18,7 +18,7 @@ namespace RockShop.Core.Services
         {
             var staff = new Staff()
             {
-                UserId = userId,
+                AccountId = userId,
                 PhoneNumber = phoneNumber
             };
             await repo.AddAsync(staff);
@@ -27,7 +27,7 @@ namespace RockShop.Core.Services
 
         public async Task<bool> ExistsById(string userId)
         {
-            return await repo.All<Staff>().AnyAsync(a => a.UserId == userId);
+            return await repo.All<Staff>().AnyAsync(a => a.AccountId == userId);
         }
 
         //TODO: IMPLEMENT SHOPPING CART!

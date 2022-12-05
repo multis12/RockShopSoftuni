@@ -1,6 +1,6 @@
-﻿namespace RockShop.Core.Models.Guitar
+﻿namespace RockShop.Core.Models.Product
 {
-    public class GuitarCategoryModel
+    public class ProductCategoryModel
     {
         public int Id { get; set; }
 

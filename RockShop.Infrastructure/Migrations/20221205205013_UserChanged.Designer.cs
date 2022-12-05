@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RockShop.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using RockShop.Infrastructure.Data;
 namespace RockShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205205013_UserChanged")]
+    partial class UserChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,15 +230,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "543a253c-9762-4b6a-9fc4-933e0a257728",
+                            ConcurrencyStamp = "b1569b47-939a-4fb1-9557-5ed21522e7af",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@mail.com",
                             NormalizedUserName = "user@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOX8xOUKMM9/vUkGptrFLV5w5ZvzaGQ3rpIeoN9Gvh6cIS8HZEJEjtZ6wd2D+go6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM1bmvX7tbz+ma/ZPauqOEaHkLNVExPRuP/tdVoqW0APmxGhSNhHgvzOr2oA3KAJcA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a48f2095-1945-409d-9b80-82293489ca23",
+                            SecurityStamp = "dda611ec-b901-4c75-8395-72312a386f0b",
                             TwoFactorEnabled = false,
                             UserName = "user@mail.com"
                         },
@@ -244,15 +246,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "f2423455-638c-4558-b7eb-510312d02ef1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cedcdff6-bdcd-4ee5-8227-40f1f1a0c320",
+                            ConcurrencyStamp = "34b8b5c9-7501-404a-acc0-404974698e88",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/+Cfal1WJSBSlC2HJWEvcePcyAsdUNg1QKWlQALUj76Hu4+5JpIoo366DrURKltQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHlQGfEAPlSyX7yvRKwdKSh2M4Q3ebr0U3IRAv1d7DRmN+7g/EIBp0uSXeKczfXrDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "60334386-5026-4bf3-89fe-7f1d5960d81f",
+                            SecurityStamp = "5ba72803-7452-4ec1-9a4d-61d0f20c9ca4",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -338,9 +340,6 @@ namespace RockShop.Infrastructure.Migrations
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -388,7 +387,6 @@ namespace RockShop.Infrastructure.Migrations
                             Frets = 24,
                             ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091545_8612_i.webp",
                             InStock = true,
-                            IsActive = true,
                             Name = "Ibanez GRG170DX BKN",
                             Neck = "Maple",
                             Price = 528.00m,
@@ -405,7 +403,6 @@ namespace RockShop.Infrastructure.Migrations
                             Frets = 24,
                             ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091523_6553_i.webp",
                             InStock = true,
-                            IsActive = true,
                             Name = "Ibanez RGT6EX-IPT",
                             Neck = "Wizard II Maple/Walnut neck-thru",
                             Price = 1721.00m,
@@ -422,7 +419,6 @@ namespace RockShop.Infrastructure.Migrations
                             Frets = 20,
                             ImageUrl = "https://rockshock.eu/uploads/2022/04/12/1649751909_0387_i.webp",
                             InStock = true,
-                            IsActive = true,
                             Name = "Ibanez AAD100 OPN",
                             Neck = "Low Oval Grip with Rounded Fretboard EdgeThermo Aged™ Nyatoh neck",
                             Price = 548.00m,

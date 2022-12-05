@@ -10,7 +10,7 @@ namespace RockShop.Infrastructure.Data.Configuration
             builder.HasData(new Staff()
             {
                 Id = 1,
-                UserId = "f2423455-638c-4558-b7eb-510312d02ef1",
+                AccountId = "f2423455-638c-4558-b7eb-510312d02ef1",
                 PhoneNumber = "+35988888"
             });
         }

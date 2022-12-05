@@ -3,18 +3,18 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace RockShop.Infrastructure.Data.Configuration
 {
-    internal class GuitarConfiguration : IEntityTypeConfiguration<Guitar>
+    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<Guitar> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasData(CreateGuitars());
+            builder.HasData(CreateProducts());
         }
 
-        private List<Guitar> CreateGuitars()
+        private List<Product> CreateProducts()
         {
-            List<Guitar> guitars = new List<Guitar>()
+            List<Product> products = new List<Product>()
             {
-                new Guitar()
+                new Product()
                 {
                     Id = 1,
                     Name = "Ibanez GRG170DX BKN",
@@ -31,7 +31,7 @@ namespace RockShop.Infrastructure.Data.Configuration
                     ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091545_8612_i.webp"
                 },
 
-                    new Guitar()
+                    new Product()
                 {
                     Id = 2,
                     Name = "Ibanez RGT6EX-IPT",
@@ -48,7 +48,7 @@ namespace RockShop.Infrastructure.Data.Configuration
                     ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091523_6553_i.webp"
                 },
 
-                new Guitar()
+                new Product()
                 {
                     Id = 3,
                     Name = "Ibanez AAD100 OPN",
@@ -66,7 +66,7 @@ namespace RockShop.Infrastructure.Data.Configuration
                 }
 
             };
-            return guitars;
+            return products;
         }
     }
 }

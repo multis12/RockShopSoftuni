@@ -1,26 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RockShop.Core.Contracts;
-using RockShop.Core.Models.Guitar;
+using RockShop.Core.Models.Product;
 using RockShop.Infrastructure.Data;
 using RockShop.Infrastructure.Data.Common;
 using Type = RockShop.Infrastructure.Data.Type;
 
 namespace RockShop.Core.Services
 {
-    public class GuitarService : IGuitarService
+    public class ProductService : IProductService
     {
         private readonly IRepository repo;
+        private readonly IStaffService staffService;
 
-        public GuitarService(IRepository _repo)
+        public ProductService(IRepository _repo, IStaffService _staffService)
         {
             repo = _repo;
+            staffService = _staffService;
         }
 
-        public async Task<IEnumerable<GuitarCategoryModel>> AllCategories()
+        public async Task<IEnumerable<ProductCategoryModel>> AllCategories()
         {
             return await repo.AllReadonly<Category>()
                 .OrderBy(c => c.Name)
-                .Select(c => new GuitarCategoryModel() 
+                .Select(c => new ProductCategoryModel() 
                 {
                     Id = c.Id,
                     Name = c.Name
@@ -28,11 +31,11 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<GuitarTypeModel>> AllTypes()
+        public async Task<IEnumerable<ProductTypeModel>> AllTypes()
         {
             return await repo.AllReadonly<Type>()
                 .OrderBy(t => t.Name)
-                .Select(t => new GuitarTypeModel()
+                .Select(t => new ProductTypeModel()
                 {
                     Id = t.Id,
                     Name = t.Name
@@ -46,15 +49,15 @@ namespace RockShop.Core.Services
                 .AnyAsync(c => c.Id == categoryId);
         }
 
-        public async Task<bool> TypeExists(int typeId)
+        public async Task<bool> TypeExists(int? typeId)
         {
             return await repo.AllReadonly<Type>()
                 .AnyAsync(t => t.Id == typeId);
         }
 
-        public async Task<int> Create(GuitarModel model)
+        public async Task<int> Create(ProductModel model)
         {
-            var guitar = new Guitar()
+            var product = new Product()
             {
                 Name = model.Name,
                 CategoryId = model.CategoryId,
@@ -66,21 +69,24 @@ namespace RockShop.Core.Services
                 InStock = model.InStock,
                 Bridge = model.Bridge,
                 Frets = model.Frets,
+                Holes = model.Holes,
+                Tune = model.Tune,
                 Adapters = model.Adapters,
-                Price = model.Price,
+                Price = model.Price
             };
 
-            await repo.AddAsync(guitar);
+            await repo.AddAsync(product);
             await repo.SaveChangesAsync();
 
-            return guitar.Id;
+            return product.Id;
         }
 
-        public async Task<IEnumerable<GuitarIndexModel>> LastSevenGuitars()
+        public async Task<IEnumerable<ProductIndexModel>> LastSevenProducts()
         {
-            return await repo.AllReadonly<Guitar>()
+            return await repo.AllReadonly<Product>()
+                .Where(g => g.IsActive)
                 .OrderByDescending(g => g.Id)
-                .Select(g => new GuitarIndexModel()
+                .Select(g => new ProductIndexModel()
                 {
                     Id = g.Id,
                     ImageUrl = g.ImageUrl,
@@ -90,37 +96,38 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<GuitarQueryModel> All(string ? category = null, string? searchTerm = null
-            , GuitarSorting sorting = GuitarSorting.Newest, int currentPage = 1, int guitarsPerPage = 1)
+        public async Task<ProductQueryModel> All(string ? category = null, string? searchTerm = null
+            , ProductSorting sorting = ProductSorting.Newest, int currentPage = 1, int guitarsPerPage = 1)
         {
-            var result = new GuitarQueryModel();
-            var guitars = repo.AllReadonly<Guitar>();
+            var result = new ProductQueryModel();
+            var products = repo.AllReadonly<Product>()
+                .Where(p => p.IsActive);
 
             if (string.IsNullOrEmpty(category) == false)
             {
-                guitars = guitars.Where(g => g.Category.Name == category);
+                products = products.Where(g => g.Category.Name == category);
             }
             if (string.IsNullOrEmpty(searchTerm) == false)
             {
                 searchTerm = $"%{searchTerm.ToLower()}%";
 
-                guitars = guitars.Where(g => EF.Functions.Like(g.Name, searchTerm) ||
+                products = products.Where(g => EF.Functions.Like(g.Name, searchTerm) ||
                                     EF.Functions.Like(g.Description, searchTerm));
             }
 
-            guitars = sorting switch
+            products = sorting switch
             {
-                GuitarSorting.Price => guitars
+                ProductSorting.Price => products
                 .OrderBy(g => g.Price),
-                GuitarSorting.InStockFirst => guitars
+                ProductSorting.InStockFirst => products
                 .OrderBy(g => g.InStock),
-                _ => guitars.OrderByDescending(g => g.Id)
+                _ => products.OrderByDescending(g => g.Id)
             };
 
-            result.Guitars = await guitars
+            result.Guitars = await products
                 .Skip((currentPage - 1) * guitarsPerPage)
                 .Take(guitarsPerPage)
-                .Select(g => new GuitarServiceModel()
+                .Select(g => new ProductServiceModel()
                 {
                     Id = g.Id,
                     ImageUrl = g.ImageUrl,
@@ -130,7 +137,7 @@ namespace RockShop.Core.Services
                 })
                 .ToListAsync();
 
-            result.TotalGuitarsCount = await guitars.CountAsync();
+            result.TotalGuitarsCount = await products.CountAsync();
 
             return result;
         }
@@ -151,11 +158,12 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<GuitarDetailsModel> GuitarDetailsById(int Id)
+        public async Task<ProductDetailsModel> ProductDetailsById(int Id)
         {
-            return await repo.AllReadonly<Guitar>()
+            return await repo.AllReadonly<Product>()
+                .Where(g => g.IsActive)
                 .Where(g => g.Id == Id)
-                .Select(g => new GuitarDetailsModel()
+                .Select(g => new ProductDetailsModel()
                 {
                     Id = g.Id,
                     Category = g.Category.Name,
@@ -168,6 +176,8 @@ namespace RockShop.Core.Services
                     Frets = g.Frets,
                     Neck = g.Neck,
                     Price = g.Price,
+                    Holes = g.Holes,
+                    Tune = g.Tune,
                     Type = g.Type.Name,
                     Description = g.Description
                 })
@@ -176,8 +186,47 @@ namespace RockShop.Core.Services
 
         public async Task<bool> Exists(int Id)
         {
-            return await repo.AllReadonly<Guitar>()
-                .AnyAsync(g => g.Id == Id);
+            return await repo.AllReadonly<Product>()
+                .AnyAsync(g => g.Id == Id && g.IsActive);
+        }
+
+        public async Task Edit(int productId, ProductModel model)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+
+            product.Description = model.Description;
+            product.Name = model.Name;
+            product.ImageUrl = model.ImageUrl;
+            product.Adapters = model.Adapters;
+            product.InStock = model.InStock;
+            product.Bridge = model.Bridge;
+            product.Frets = model.Frets;
+            product.Neck = model.Neck;
+            product.Holes = model.Holes;
+            product.Tune = model.Tune;
+            product.Price = model.Price;
+            product.CategoryId = model.CategoryId;
+            product.TypeId = model.TypeId;
+
+            await repo.SaveChangesAsync();
+        }
+
+        public async Task<int> GetProductCategoryId(int productId)
+        {
+            return (await repo.GetByIdAsync<Product>(productId)).CategoryId;
+        }
+
+        public async Task<int?> GetProductTypeId(int productId)
+        {
+            return (await repo.GetByIdAsync<Product>(productId)).TypeId;
+        }
+
+        public async Task Delete(int productId)
+        {
+            var product = await repo.GetByIdAsync<Product>(productId);
+            product.IsActive = false;
+
+            await repo.SaveChangesAsync();
         }
     }
 }

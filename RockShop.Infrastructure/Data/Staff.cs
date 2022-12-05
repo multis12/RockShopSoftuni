@@ -10,16 +10,16 @@ namespace RockShop.Infrastructure.Data
         public int Id { get; set; }
 
         [Required]
-        public string UserId { get; set; } = null!;
+        public string AccountId { get; set; } = null!;
 
         [Required]
         [StringLength(15)]
         public string PhoneNumber { get; set; } = null!;
 
         
-        public IEnumerable<Guitar>? Guitars { get; set; }
+        public IEnumerable<Product>? Products { get; set; }
 
-        [ForeignKey(nameof(UserId))]
-        public IdentityUser User { get; set; } = null!;
+        [ForeignKey(nameof(AccountId))]
+        public Account User { get; set; } = null!;
     }
 }

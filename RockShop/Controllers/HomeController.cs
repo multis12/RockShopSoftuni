@@ -7,19 +7,19 @@ namespace RockShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IGuitarService guitarService;
+        private readonly IProductService productService;
 
         private readonly IStaffService staffService;
 
-        public HomeController(IGuitarService _guitarService
+        public HomeController(IProductService _productService
                             , IStaffService _staffService)
         {
-            guitarService = _guitarService;
+            productService = _productService;
             staffService = _staffService;
         }
         public async Task<IActionResult> Index()
         {
-            var model = await guitarService.LastSevenGuitars();
+            var model = await productService.LastSevenProducts();
             return View(model);
         }
 

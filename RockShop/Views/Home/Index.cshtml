@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GuitarIndexModel>
+﻿@model IEnumerable<ProductIndexModel>
 @{
     ViewData["Title"] = "Home Page";
     bool first = true;
@@ -9,13 +9,13 @@
     <div class="mt-4 p-5 bg-">
         <h1 class="display-4">Welcome to the Rock Shop</h1>
         <p class="lead">
-            There are no guitars currently in stock.
+            There are no Product currently in stock.
         </p>
         <hr class="my-4">
         <p class="lead">
             @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
             {
-                <a asp-controller="Guitar" asp-action="Add" class="btn btn-primary btn-lg"
+                <a asp-controller="Product" asp-action="Add" class="btn btn-primary btn-lg"
                 role="button">Add Guitar</a>
             }
         </p>
@@ -26,15 +26,15 @@
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach (var guitar in Model)
+        @foreach (var product in Model)
         {
             <div class="carousel-item @(first ? "active" : string.Empty)">
                 <img class="d-block w-100" style="height:500px"
-                src="@guitar.ImageUrl" alt="@guitar.Name">
+                 src="@product.ImageUrl" alt="@product.Name">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>
-                        <a class="btn btn-primary" asp-controller="Guitar" asp-action="Details"
-                        asp-route-id="@guitar.Id"> @guitar.Name</a>
+                        <a class="btn btn-primary" asp-controller="Product" asp-action="Details"
+                       asp-route-id="@product.Id"> @product.Name</a>
                     </h5>
                 </div>
             </div>

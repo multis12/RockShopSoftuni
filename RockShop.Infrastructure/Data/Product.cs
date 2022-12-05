@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RockShop.Infrastructure.Data
 {
-    public class Guitar
+    public class Product
     {
         [Key]
         public int Id { get; set; }
@@ -14,36 +14,35 @@ namespace RockShop.Infrastructure.Data
         public string Name { get; set; } = null!;
 
         [Required]
-        [StringLength(2000)]
+        [StringLength(500)]
         public string Description { get; set; } = null!;
 
-        [Required]
         [StringLength(100)]
-        public string Neck { get; set; } = null!;
+        public string? Neck { get; set; }
 
-        [Required]
         [StringLength(60)]
-        public string Body { get; set; } = null!;
+        public string? Body { get; set; }
 
-        [Required]
         [StringLength(50)]
-        public string Bridge { get; set; } = null!;
+        public string? Bridge { get; set; }
 
-        [Required]
-        public int Frets { get; set; }
+        public int? Frets { get; set; }
 
-        [Required]
         [StringLength(60)]
-        public string Adapters { get; set; } = null!;
+        public string? Adapters { get; set; }
 
-        [Required]
-        public int TypeId { get; set; }
+        public int? TypeId { get; set; }
 
         [ForeignKey(nameof(TypeId))]
-        public Type Type { get; set; } = null!;
+        public Type? Type { get; set; }
 
         [Required]
         public int CategoryId { get; set; }
+
+        [StringLength(50)]
+        public string? Tune { get; set; }
+
+        public int? Holes { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; } = null!;
@@ -60,6 +59,7 @@ namespace RockShop.Infrastructure.Data
         [StringLength(200)]
         public string ImageUrl { get; set; } = null!;
 
-        
+        public bool IsActive { get; set; } = true;
+
     }
 }

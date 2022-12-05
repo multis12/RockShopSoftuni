@@ -4,7 +4,7 @@ using RockShop.Infrastructure.Data.Configuration;
 
 namespace RockShop.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<Account>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -16,13 +16,13 @@ namespace RockShop.Infrastructure.Data
             builder.ApplyConfiguration(new UserConfiguration()); 
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new TypeConfiguration());
-            builder.ApplyConfiguration(new GuitarConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
             builder.ApplyConfiguration(new StaffConfiguration());
 
             base.OnModelCreating(builder);
         }
 
-        public DbSet<Guitar> Guitars { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
 
         public DbSet<Category> Categories { get; set; } = null!;
 

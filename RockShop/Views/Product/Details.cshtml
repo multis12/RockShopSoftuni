@@ -1,0 +1,66 @@
+﻿@model ProductDetailsModel
+
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <img class="card-img-top" style="width: 20rem;"
+                 src="@Model.ImageUrl" alt="Guitar Image">
+        </div>
+        <div class="card col-8 border-0">
+            <p style="font-size:25px;"><u>@Model.Name</u></p>
+            <p>
+                Price:
+                <b>@String.Format("{0:f2}", Model.Price) BGN</b>
+            </p>
+            <p>@Model.Description</p>
+            <p>Category: <b>@Model.Category</b></p>
+            <p>Type: <b>@Model.Type</b></p>
+            @if (Model.Neck != null)
+            {
+                <p>Neck: <b>@Model.Neck</b></p>
+            }
+            @if (Model.Body != null)
+            {
+                <p>Body: <b>@Model.Body</b></p>
+            }
+            @if (Model.Frets != null)
+            {
+                <p>Frets: <b>@Model.Frets</b></p>
+            }
+            @if (Model.Adapters != null)
+            {
+                <p>Adapters: <b>@Model.Adapters</b></p>
+            }
+            @if (Model.Bridge != null)
+            {
+                <p>Bridge: <b>@Model.Bridge</b></p>
+            }
+            @if (Model.Holes != null)
+            {
+                <p>Holes: <b>@Model.Holes</b></p>
+            }
+            @if (Model.Tune != null)
+            {
+                <p>Tune: <b>@Model.Tune</b></p>
+            }
+            <p><i>(@(Model.InStock ? "In stock" : "Not in stock"))</i></p>
+            <div class="form-inline">
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-warning" asp-controller="Product" asp-action="Edit"
+                       asp-route-id="@Model.Id">Edit</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Product" asp-action="Delete"
+                       asp-route-id="@Model.Id">Delete</a>
+                }
+            </div>
+            <p></p>
+        </div>
+    </div>
+</div>

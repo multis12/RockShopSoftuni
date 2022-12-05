@@ -6,7 +6,7 @@ namespace RockShop.Infrastructure.Data
     {
         public Category()
         {
-            Guitars = new List<Guitar>();
+            Products = new List<Product>();
         }
         [Key]
         public int Id { get; set; }
@@ -15,6 +15,6 @@ namespace RockShop.Infrastructure.Data
         [StringLength(60)]
         public string Name { get; set; } = null!;
 
-        public List<Guitar> Guitars { get; set; } = null!;
+        public List<Product> Products { get; set; } = null!;
     }
 }

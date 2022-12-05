@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RockShop.Core.Models.Guitar
+namespace RockShop.Core.Models.Product
 {
-    public class GuitarServiceModel
+    public class ProductServiceModel
     {
         public int Id { get; init; }
 

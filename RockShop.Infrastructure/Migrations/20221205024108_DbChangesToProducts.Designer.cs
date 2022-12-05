@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RockShop.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using RockShop.Infrastructure.Data;
 namespace RockShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205024108_DbChangesToProducts")]
+    partial class DbChangesToProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,6 +74,105 @@ namespace RockShop.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3c245fa7-26e4-4ffc-af47-533dd58b1061",
+                            Email = "user@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "user@mail.com",
+                            NormalizedUserName = "user@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGMjqy8gJ5bXIKlZun05YDMGIpj9Wp3McnEAwH/q+rSuTpFpAe4LCBX834kAQGFHUw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ddfa2667-e7ea-4820-8f39-fb40fc605071",
+                            TwoFactorEnabled = false,
+                            UserName = "user@mail.com"
+                        },
+                        new
+                        {
+                            Id = "f2423455-638c-4558-b7eb-510312d02ef1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7e397add-52a8-4d1d-82fe-8917f5e74a02",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "admin@mail.com",
+                            NormalizedUserName = "admin@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAELjjntzsicmO3CzghG9B+P0kNK1S/5plRNeMy6LkoQ1R5IxioQCmqrBFvF4pfItPdQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b9a38c14-0d85-4561-b8f1-aca7909c81b4",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -159,105 +260,6 @@ namespace RockShop.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RockShop.Infrastructure.Data.Account", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "543a253c-9762-4b6a-9fc4-933e0a257728",
-                            Email = "user@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "user@mail.com",
-                            NormalizedUserName = "user@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOX8xOUKMM9/vUkGptrFLV5w5ZvzaGQ3rpIeoN9Gvh6cIS8HZEJEjtZ6wd2D+go6g==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a48f2095-1945-409d-9b80-82293489ca23",
-                            TwoFactorEnabled = false,
-                            UserName = "user@mail.com"
-                        },
-                        new
-                        {
-                            Id = "f2423455-638c-4558-b7eb-510312d02ef1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "cedcdff6-bdcd-4ee5-8227-40f1f1a0c320",
-                            Email = "admin@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "admin@mail.com",
-                            NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/+Cfal1WJSBSlC2HJWEvcePcyAsdUNg1QKWlQALUj76Hu4+5JpIoo366DrURKltQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "60334386-5026-4bf3-89fe-7f1d5960d81f",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
-                        });
-                });
-
             modelBuilder.Entity("RockShop.Infrastructure.Data.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -301,9 +303,6 @@ namespace RockShop.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AccountId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Adapters")
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
@@ -321,13 +320,10 @@ namespace RockShop.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<int?>("Frets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Holes")
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
@@ -336,9 +332,6 @@ namespace RockShop.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<bool>("InStock")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -357,16 +350,10 @@ namespace RockShop.Infrastructure.Migrations
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Tune")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<int?>("TypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.HasIndex("CategoryId");
 
@@ -388,7 +375,6 @@ namespace RockShop.Infrastructure.Migrations
                             Frets = 24,
                             ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091545_8612_i.webp",
                             InStock = true,
-                            IsActive = true,
                             Name = "Ibanez GRG170DX BKN",
                             Neck = "Maple",
                             Price = 528.00m,
@@ -405,7 +391,6 @@ namespace RockShop.Infrastructure.Migrations
                             Frets = 24,
                             ImageUrl = "https://rockshock.eu/uploads/2021/10/01/1633091523_6553_i.webp",
                             InStock = true,
-                            IsActive = true,
                             Name = "Ibanez RGT6EX-IPT",
                             Neck = "Wizard II Maple/Walnut neck-thru",
                             Price = 1721.00m,
@@ -422,7 +407,6 @@ namespace RockShop.Infrastructure.Migrations
                             Frets = 20,
                             ImageUrl = "https://rockshock.eu/uploads/2022/04/12/1649751909_0387_i.webp",
                             InStock = true,
-                            IsActive = true,
                             Name = "Ibanez AAD100 OPN",
                             Neck = "Low Oval Grip with Rounded Fretboard EdgeThermo Aged™ Nyatoh neck",
                             Price = 548.00m,
@@ -438,18 +422,18 @@ namespace RockShop.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AccountId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Staffs");
 
@@ -457,8 +441,8 @@ namespace RockShop.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            AccountId = "f2423455-638c-4558-b7eb-510312d02ef1",
-                            PhoneNumber = "+35988888"
+                            PhoneNumber = "+35988888",
+                            UserId = "f2423455-638c-4558-b7eb-510312d02ef1"
                         });
                 });
 
@@ -508,7 +492,7 @@ namespace RockShop.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("RockShop.Infrastructure.Data.Account", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -517,7 +501,7 @@ namespace RockShop.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("RockShop.Infrastructure.Data.Account", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -532,7 +516,7 @@ namespace RockShop.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RockShop.Infrastructure.Data.Account", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -541,7 +525,7 @@ namespace RockShop.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("RockShop.Infrastructure.Data.Account", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -550,10 +534,6 @@ namespace RockShop.Infrastructure.Migrations
 
             modelBuilder.Entity("RockShop.Infrastructure.Data.Product", b =>
                 {
-                    b.HasOne("RockShop.Infrastructure.Data.Account", null)
-                        .WithMany("UserProducts")
-                        .HasForeignKey("AccountId");
-
                     b.HasOne("RockShop.Infrastructure.Data.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
@@ -575,18 +555,13 @@ namespace RockShop.Infrastructure.Migrations
 
             modelBuilder.Entity("RockShop.Infrastructure.Data.Staff", b =>
                 {
-                    b.HasOne("RockShop.Infrastructure.Data.Account", "User")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("RockShop.Infrastructure.Data.Account", b =>
-                {
-                    b.Navigation("UserProducts");
                 });
 
             modelBuilder.Entity("RockShop.Infrastructure.Data.Category", b =>

@@ -1,4 +1,4 @@
-﻿@model GuitarModel
+﻿@model ProductModel
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
@@ -34,6 +34,16 @@
                 <input asp-for="Frets" class="form-control" placeholder="Frets...">
                 <span asp-validation-for="Frets" class="small text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Tune"></label>
+                <input asp-for="Tune" class="form-control" placeholder="Tune...">
+                <span asp-validation-for="Tune" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Holes"></label>
+                <input asp-for="Holes" class="form-control" placeholder="Holes...">
+                <span asp-validation-for="Holes" class="small text-danger"></span>
+            </div>
             <div class="form-check-label">
                 <label asp-for="InStock"></label>
                 <input asp-for="InStock" class="form-check-input" placeholder="InStock...">
@@ -41,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description"></label>
-                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Two bedrooms..."></textarea>
+                <textarea asp-for="Description" rows="4" class="form-control" placeholder="..."></textarea>
                 <span asp-validation-for="Description" class="small text-danger"></span>
             </div>
             <div class="form-group">

@@ -25,5 +25,9 @@ namespace RockShop.Core.Contracts
 
         Task<IEnumerable<string>> AllCategoriesNames();
         Task<IEnumerable<string>> AllTypesNames();
+
+        Task<GuitarDetailsModel> GuitarDetailsById(int Id);
+
+        Task<bool> Exists(int Id);
     }
 }

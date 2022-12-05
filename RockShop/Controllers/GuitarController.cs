@@ -48,7 +48,12 @@ namespace RockShop.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
-            var model = new GuitarDetailsModel();
+            if ((await guitarService.Exists(id)) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var model = await guitarService.GuitarDetailsById(id);
 
             return View(model);
         }

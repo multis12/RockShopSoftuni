@@ -90,7 +90,8 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<GuitarQueryModel> All(string? category = null, string? searchTerm = null, GuitarSorting sorting = GuitarSorting.Newest, int currentPage = 1, int guitarsPerPage = 1)
+        public async Task<GuitarQueryModel> All(string ? category = null, string? searchTerm = null
+            , GuitarSorting sorting = GuitarSorting.Newest, int currentPage = 1, int guitarsPerPage = 1)
         {
             var result = new GuitarQueryModel();
             var guitars = repo.AllReadonly<Guitar>();
@@ -99,7 +100,6 @@ namespace RockShop.Core.Services
             {
                 guitars = guitars.Where(g => g.Category.Name == category);
             }
-
             if (string.IsNullOrEmpty(searchTerm) == false)
             {
                 searchTerm = $"%{searchTerm.ToLower()}%";
@@ -149,6 +149,35 @@ namespace RockShop.Core.Services
                 .Select(t => t.Name)
                 .Distinct()
                 .ToListAsync();
+        }
+
+        public async Task<GuitarDetailsModel> GuitarDetailsById(int Id)
+        {
+            return await repo.AllReadonly<Guitar>()
+                .Where(g => g.Id == Id)
+                .Select(g => new GuitarDetailsModel()
+                {
+                    Id = g.Id,
+                    Category = g.Category.Name,
+                    Body = g.Body,
+                    Name = g.Name,
+                    ImageUrl = g.ImageUrl,
+                    Adapters = g.Adapters,
+                    InStock = g.InStock,
+                    Bridge = g.Bridge,
+                    Frets = g.Frets,
+                    Neck = g.Neck,
+                    Price = g.Price,
+                    Type = g.Type.Name,
+                    Description = g.Description
+                })
+                .FirstAsync();
+        }
+
+        public async Task<bool> Exists(int Id)
+        {
+            return await repo.AllReadonly<Guitar>()
+                .AnyAsync(g => g.Id == Id);
         }
     }
 }

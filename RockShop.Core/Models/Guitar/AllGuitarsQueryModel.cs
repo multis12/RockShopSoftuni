@@ -12,6 +12,8 @@ namespace RockShop.Core.Models.Guitar
 
         public string? Category { get; set; }
 
+        public string? Type { get; set; }
+
         public string? SearchTerm { get; set; }
 
         public GuitarSorting Sorting { get; set; }
@@ -21,6 +23,8 @@ namespace RockShop.Core.Models.Guitar
         public int TotalGuitarsCount { get; set; }
 
         public IEnumerable<string> Categories { get; set; } = Enumerable.Empty<string>();
+
+        public IEnumerable<string> Types { get; set; } = Enumerable.Empty<string>();
 
         public IEnumerable<GuitarServiceModel> Guitars { get; set; } = Enumerable.Empty<GuitarServiceModel>();
     }

@@ -51,7 +51,7 @@ namespace RockShop.Controllers
             }
 
             await staffService.Create(userId, model.PhoneNumber);
-            return RedirectToAction("All", "Guitar"); 
+            return RedirectToAction("All", "Product"); 
         }
     }
 }

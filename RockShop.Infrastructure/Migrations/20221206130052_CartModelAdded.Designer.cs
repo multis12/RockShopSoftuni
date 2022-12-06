@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RockShop.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using RockShop.Infrastructure.Data;
 namespace RockShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221206130052_CartModelAdded")]
+    partial class CartModelAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,15 +230,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f05033db-8116-4eb3-acd1-6d1975f67de0",
+                            ConcurrencyStamp = "10c8fc32-1284-456e-a231-a83d380e8dec",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@mail.com",
                             NormalizedUserName = "user@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPVsLsazIdh0kJ2k7BJOhEnAQ41P9uUtmAj3rsY9vQDmlGFpVxCGIrPcqY0sQzYjtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ/xFkjp6upWvv4Bu8GZLTijUmXqhsrN9XVHKkRvOLoqlhnqe6aaMfrAkXKvdbjEog==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e3703e71-c73a-4bad-82ab-52085de7dcf1",
+                            SecurityStamp = "a426f242-81a3-4162-81ec-494ba301081f",
                             TwoFactorEnabled = false,
                             UserName = "user@mail.com"
                         },
@@ -244,21 +246,21 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "f2423455-638c-4558-b7eb-510312d02ef1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "126e6d74-cfc2-491e-b00b-469a5c9ffd03",
+                            ConcurrencyStamp = "7e13bc7a-64e7-4a54-97bd-e881944ba2a6",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAED4HTBpE7sVcz7o0b6N/jVPsMxTd13OOirggGEYdty2qsqkfJU7KMvxR5Q5ZL2qyhw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKqwzIreDKh4FE+HxgxOqNXvMEWOoYkZH9rvqGvMZ75NULyx+4Zc1I79TIyLFDGjrA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7b55f57-7b51-4690-aa54-25460f6ea0ae",
+                            SecurityStamp = "38e35e2e-35a5-45b9-ba96-34baf2a4e098",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
                 });
 
-            modelBuilder.Entity("RockShop.Infrastructure.Data.CartItem", b =>
+            modelBuilder.Entity("RockShop.Infrastructure.Data.Cart", b =>
                 {
                     b.Property<string>("AccountId")
                         .HasColumnType("nvarchar(450)");
@@ -270,7 +272,7 @@ namespace RockShop.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItem");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("RockShop.Infrastructure.Data.Category", b =>
@@ -558,7 +560,7 @@ namespace RockShop.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RockShop.Infrastructure.Data.CartItem", b =>
+            modelBuilder.Entity("RockShop.Infrastructure.Data.Cart", b =>
                 {
                     b.HasOne("RockShop.Infrastructure.Data.Account", "AccountUser")
                         .WithMany("UserProducts")

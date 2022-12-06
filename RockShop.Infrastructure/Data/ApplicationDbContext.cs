@@ -13,6 +13,7 @@ namespace RockShop.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<CartItem>().HasKey(x => new { x.AccountId, x.ProductId });
             builder.ApplyConfiguration(new UserConfiguration()); 
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new TypeConfiguration());

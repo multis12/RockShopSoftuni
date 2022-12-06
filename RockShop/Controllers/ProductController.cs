@@ -38,14 +38,6 @@ namespace RockShop.Controllers
             return View(query);
         }
 
-        
-        public async Task<IActionResult> ShoppingCart()
-        {
-            var model = new ProductQueryModel();
-
-            return View(model);
-        }
-
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {

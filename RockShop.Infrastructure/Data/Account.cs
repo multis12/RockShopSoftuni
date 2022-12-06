@@ -9,6 +9,6 @@ namespace RockShop.Infrastructure.Data
 {
     public class Account : IdentityUser
     {
-        public List<Product> UserProducts { get; set; } = new List<Product>();
+        public List<CartItem> UserProducts { get; set; } = new List<CartItem>();
     }
 }

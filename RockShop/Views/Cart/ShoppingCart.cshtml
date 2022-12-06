@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ProductServiceModel>
+
+@{
+    ViewBag.Title = "Your Shopping cart";
+}
+
+<h2 class ="text-center">@ViewBag.Title</h2>
+<hr/>
+
+@foreach (var product in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <img class="card-img-top" style="width: 18rem;"
+             src="@product.ImageUrl" alt="Product Image">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@product.Name</h5>
+            </div>
+            <h6>
+                Price:
+                <b>@String.Format("{0:f2}", product.Price) BGN</b>
+            </h6>
+            <form class="input-group-sm" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@product.Id">
+                <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Remove from Cart" />
+            </form>
+        </div>
+    }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RockShop.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using RockShop.Infrastructure.Data;
 namespace RockShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221206155652_CartItemsAdded")]
+    partial class CartItemsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,15 +230,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f05033db-8116-4eb3-acd1-6d1975f67de0",
+                            ConcurrencyStamp = "59f5060d-01e0-42f5-82cf-c7ec6b60030e",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@mail.com",
                             NormalizedUserName = "user@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPVsLsazIdh0kJ2k7BJOhEnAQ41P9uUtmAj3rsY9vQDmlGFpVxCGIrPcqY0sQzYjtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELA+1lrOBqRb9ahhVo9Y9prE6JsEOvl3AgBZ2gaLpXnAJ8jejTh4bUuPuVcU8ce5kA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e3703e71-c73a-4bad-82ab-52085de7dcf1",
+                            SecurityStamp = "05c26160-917a-419f-b009-167172192f20",
                             TwoFactorEnabled = false,
                             UserName = "user@mail.com"
                         },
@@ -244,15 +246,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "f2423455-638c-4558-b7eb-510312d02ef1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "126e6d74-cfc2-491e-b00b-469a5c9ffd03",
+                            ConcurrencyStamp = "c82c50fb-b13e-43e5-8719-cd0bc2a9ed3e",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAED4HTBpE7sVcz7o0b6N/jVPsMxTd13OOirggGEYdty2qsqkfJU7KMvxR5Q5ZL2qyhw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKxR23BaMQVYwcOCv7HA9ysRb7V7o6F41alB4k+pbpBjqUIncSTridv2u1PBvK7yuQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7b55f57-7b51-4690-aa54-25460f6ea0ae",
+                            SecurityStamp = "69eca1c9-ddc8-4dd0-8485-e993f78d8620",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });

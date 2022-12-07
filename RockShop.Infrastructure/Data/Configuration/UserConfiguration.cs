@@ -4,19 +4,19 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace RockShop.Infrastructure.Data.Configuration
 {
-    internal class UserConfiguration : IEntityTypeConfiguration<Account>
+    internal class UserConfiguration : IEntityTypeConfiguration<AppUser>
     {
-        public void Configure(EntityTypeBuilder<Account> builder)
+        public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.HasData(CreateUsers());
         }
 
-        private List<Account> CreateUsers()
+        private List<AppUser> CreateUsers()
         {
-            var users = new List<Account>();
-            var hasher = new PasswordHasher<Account>();
+            var users = new List<AppUser>();
+            var hasher = new PasswordHasher<AppUser>();
 
-            var user = new Account()
+            var user = new AppUser()
             {
                 Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
                 UserName = "user@mail.com",
@@ -29,7 +29,7 @@ namespace RockShop.Infrastructure.Data.Configuration
 
             users.Add(user);
 
-            user = new Account()
+            user = new AppUser()
             {
                 Id = "f2423455-638c-4558-b7eb-510312d02ef1",
                 UserName = "admin@mail.com",

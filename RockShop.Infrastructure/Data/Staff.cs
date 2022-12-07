@@ -20,6 +20,8 @@ namespace RockShop.Infrastructure.Data
         public IEnumerable<Product>? Products { get; set; }
 
         [ForeignKey(nameof(AccountId))]
-        public Account User { get; set; } = null!;
+        public AppUser User { get; set; } = null!;
+
+        public List<Order> Orders { get; set; } = new List<Order>();
     }
 }

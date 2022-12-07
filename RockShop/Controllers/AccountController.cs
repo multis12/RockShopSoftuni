@@ -8,13 +8,13 @@ namespace RockShop.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<Account> userManager;
+        private readonly UserManager<AppUser> userManager;
 
-        private readonly SignInManager<Account> signInManager;
+        private readonly SignInManager<AppUser> signInManager;
 
         public AccountController(
-            UserManager<Account> _userManager,
-            SignInManager<Account> _signInManager)
+            UserManager<AppUser> _userManager,
+            SignInManager<AppUser> _signInManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
@@ -43,7 +43,7 @@ namespace RockShop.Controllers
                 return View(model);
             }
 
-            var user = new Account()
+            var user = new AppUser()
             {
                 Email = model.Email,
                 UserName = model.UserName
@@ -94,6 +94,12 @@ namespace RockShop.Controllers
                 var result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                 if (result.Succeeded)
                 {
+                    //var user = await userManager.FindByEmailAsync(Input.Email)
+                    //if (true)
+                    //{
+
+                    //}
+
                     return RedirectToAction("All", "Product");
                 }
             }

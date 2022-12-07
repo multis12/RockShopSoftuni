@@ -4,7 +4,7 @@ using RockShop.Infrastructure.Data.Configuration;
 
 namespace RockShop.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Account>
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RockShop.Infrastructure.Data
 {
-    public class Account : IdentityUser
+    public class AppUser : IdentityUser
     {
         public List<CartItem> UserProducts { get; set; } = new List<CartItem>();
     }

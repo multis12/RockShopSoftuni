@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RockShop.Core.Contracts;
+using System.ComponentModel.DataAnnotations;
 
 namespace RockShop.Core.Models.Product
 {
-    public class ProductServiceModel
+    public class ProductServiceModel : IProductModel
     {
         public int Id { get; init; }
 

@@ -1,7 +1,7 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*@using Microsoft.AspNetCore.Identity
 @using RockShop.Infrastructure.Data
-@inject SignInManager<Account> SignInManager
-@inject UserManager<Account> UserManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
@@ -21,10 +21,12 @@
             <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
         </li>
     }
-</ul>
+</ul>*@
 
-
-@*<ul class="navbar-nav">
+@using Microsoft.AspNetCore.Identity
+@using RockShop.Infrastructure.Data
+@inject SignInManager<AppUser> SignInManager
+<ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
@@ -45,4 +47,4 @@ else
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
-</ul>*@
+</ul>

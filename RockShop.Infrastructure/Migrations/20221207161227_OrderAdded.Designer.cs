@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RockShop.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using RockShop.Infrastructure.Data;
 namespace RockShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221207161227_OrderAdded")]
+    partial class OrderAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,15 +230,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c3f1317-902f-4a3e-a824-70f010c44283",
+                            ConcurrencyStamp = "2bcb83a3-2ec1-48fc-bc7c-5fbb0aeab66a",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@mail.com",
                             NormalizedUserName = "user@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDCg5tsHbTdcZyFBu5Efu8PrWsav29jU+m2bcm+U33oEHkTLQAeSoHrMYER+YT9bmA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBA09b4xTRyOXSmdbD3/pOLYXofajxTxCnKiIu4a5gJ00uqUr441dNRY5m7QOLW3fw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6896834b-dfd0-4ec2-bbeb-ffd78dd622ec",
+                            SecurityStamp = "d6568d22-7802-4f18-a50f-9addca3bbf4c",
                             TwoFactorEnabled = false,
                             UserName = "user@mail.com"
                         },
@@ -244,15 +246,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "f2423455-638c-4558-b7eb-510312d02ef1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "41588f3e-3043-4e13-bbd6-db503d5514b7",
+                            ConcurrencyStamp = "13837253-52fa-4fca-b6bd-8c1d29e78855",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHRblswLPeSf4DebDde9aoyDZqqu8HOqljPQY0HbVUWZ9Ixnq0HRrgnHkrR3FGsQsA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECLMAvISJOYxNFWSiZ5sSEShjZkauGKSLqxXP8Bj8TO489JaJRmy8MvGY3z2q8anEg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "56d902ed-bfdc-4f07-9fd5-3b5711801173",
+                            SecurityStamp = "df98a9c3-d314-4854-b008-4343e5fd0ef3",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -319,29 +321,6 @@ namespace RockShop.Infrastructure.Migrations
                     b.Property<string>("AccountId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SecondName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int?>("StaffId")
                         .HasColumnType("int");

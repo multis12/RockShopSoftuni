@@ -1,6 +1,8 @@
-﻿namespace RockShop.Core.Models.Product
+﻿using RockShop.Core.Contracts;
+
+namespace RockShop.Core.Models.Product
 {
-    public class ProductIndexModel
+    public class ProductIndexModel : IProductModel
     {
         public int Id { get; set; }
 

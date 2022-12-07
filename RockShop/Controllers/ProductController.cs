@@ -5,6 +5,8 @@ using RockShop.Core.Models.Product;
 using RockShop.Core.Services;
 using RockShop.Extensions;
 using System.Reflection.Metadata.Ecma335;
+using RockShop.Core.Extensions;
+using Microsoft.VisualBasic;
 
 namespace RockShop.Controllers
 {
@@ -39,7 +41,7 @@ namespace RockShop.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string information)
         {
             if ((await productService.Exists(id)) == false)
             {
@@ -47,6 +49,13 @@ namespace RockShop.Controllers
             }
 
             var model = await productService.ProductDetailsById(id);
+
+            if (information != model.GetInformation())
+            {
+                TempData["ErrorMessage"] = "Don't touch the instruments!";
+
+                return RedirectToAction("Index", "Home");
+            }
 
             return View(model);
         }
@@ -97,7 +106,7 @@ namespace RockShop.Controllers
 
             int id = await productService.Create(model);
 
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new { id = id, information = model.GetInformation() });
         }
 
         [HttpGet]
@@ -185,7 +194,7 @@ namespace RockShop.Controllers
 
             await productService.Edit(model.Id, model);
 
-            return RedirectToAction(nameof(Details), new { model.Id });
+            return RedirectToAction(nameof(Details), new { model.Id, information = model.GetInformation()});
         }
 
         [HttpGet]

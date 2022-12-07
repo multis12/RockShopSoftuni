@@ -25,7 +25,7 @@ namespace RockShop.Core.Services
 
         public async Task AddToCart(int id, string userId)
         {
-            var acc = await repo.All<Account>()
+            var acc = await repo.All<AppUser>()
                 .Where(a => a.Id == userId)
                 .Include(a => a.UserProducts)
                 .FirstOrDefaultAsync();
@@ -56,7 +56,7 @@ namespace RockShop.Core.Services
 
         public async Task<IEnumerable<ProductServiceModel>> GetCart(string userId)
         {
-            var acc = await repo.AllReadonly<Account>()
+            var acc = await repo.AllReadonly<AppUser>()
                 .Where(a => a.Id == userId)
                 .Include(a => a.UserProducts)
                 .ThenInclude(ap => ap.Product)
@@ -81,7 +81,7 @@ namespace RockShop.Core.Services
 
         public async Task RemoveFromCart(int id, string userId)
         {
-            var acc = await repo.All<Account>()
+            var acc = await repo.All<AppUser>()
                 .Where(a => a.Id == userId)
                 .Include(a => a.UserProducts)
                 .FirstOrDefaultAsync();

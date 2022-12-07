@@ -14,7 +14,7 @@ namespace RockShop.Infrastructure.Data
         public string AccountId { get; set; }
 
         [ForeignKey(nameof(AccountId))]
-        public Account AccountUser { get; set; }
+        public AppUser AccountUser { get; set; }
 
         [Required]
         public int ProductId { get; set; }

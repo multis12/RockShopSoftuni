@@ -25,10 +25,5 @@ namespace RockShop.Core.Models.Order
 
         [Required]
         public int PhoneNumber { get; set; }
-
-        [Required]
-        [StringLength(60)]
-        [EmailAddress]
-        public string Email { get; set; } = null!;
     }
 }

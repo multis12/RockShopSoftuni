@@ -4,6 +4,7 @@ using RockShop.Core.Contracts;
 using RockShop.Core.Models.Product;
 using RockShop.Core.Services;
 using RockShop.Extensions;
+using static RockShop.Areas.Admin.Constants.AdminConstants;
 using System.Reflection.Metadata.Ecma335;
 using RockShop.Core.Extensions;
 using Microsoft.VisualBasic;
@@ -64,7 +65,7 @@ namespace RockShop.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            if ((await staffService.ExistsById(User.Id())) == false)
+            if (!User.IsInRole(AdminRoleName))
             {
                 return RedirectToAction(nameof(StaffController.Become), "Staff");
             }
@@ -84,7 +85,7 @@ namespace RockShop.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(ProductModel model)
         {
-            if ((await staffService.ExistsById(User.Id())) == false)
+            if (!User.IsInRole(AdminRoleName))
             {
                 return RedirectToAction(nameof(StaffController.Become), "Staff");
             }
@@ -116,7 +117,7 @@ namespace RockShop.Controllers
             {
                 return RedirectToAction(nameof(All));
             }
-            if ((await staffService.ExistsById(User.Id())) == false)
+            if (!User.IsInRole(AdminRoleName))
             {
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
@@ -163,7 +164,7 @@ namespace RockShop.Controllers
                 return View(model);
             }
 
-            if ((await staffService.ExistsById(User.Id())) == false)
+            if (!User.IsInRole(AdminRoleName))
             {
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
@@ -204,7 +205,7 @@ namespace RockShop.Controllers
             {
                 return RedirectToAction(nameof(All));
             }
-            if ((await staffService.ExistsById(User.Id())) == false)
+            if (!User.IsInRole(AdminRoleName))
             {
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
@@ -226,7 +227,7 @@ namespace RockShop.Controllers
             {
                 return RedirectToAction(nameof(All));
             }
-            if ((await staffService.ExistsById(User.Id())) == false)
+            if (!User.IsInRole(AdminRoleName))
             {
                 return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }

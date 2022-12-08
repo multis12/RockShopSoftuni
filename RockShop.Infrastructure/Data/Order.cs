@@ -29,13 +29,10 @@ namespace RockShop.Infrastructure.Data
 
         [Required]
         [StringLength(150)]
-        public string Adress { get; set; } = null!;
+        public string Address { get; set; } = null!;
 
         [Required]
         public int PhoneNumber { get; set; }
 
-        [Required]
-        [StringLength(60)]
-        public string Email { get; set; } = null!;
     }
 }

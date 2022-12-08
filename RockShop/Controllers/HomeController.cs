@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using static RockShop.Areas.Admin.Constants.AdminConstants;
 using RockShop.Core.Contracts;
 using RockShop.Models;
 using System.Diagnostics;
@@ -19,6 +20,11 @@ namespace RockShop.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole(AdminRoleName))
+            {
+                return RedirectToAction("Index", "Admin", new { area = "Admin" });
+            }
+
             var model = await productService.LastSevenProducts();
             return View(model);
         }

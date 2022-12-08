@@ -24,6 +24,9 @@ namespace RockShop.Core.Models.Order
         public string Address { get; set; } = null!;
 
         [Required]
-        public int PhoneNumber { get; set; }
+        [StringLength(15, MinimumLength = 7)]
+        [Phone]
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; } = null!;
     }
 }

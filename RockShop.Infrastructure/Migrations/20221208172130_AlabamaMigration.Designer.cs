@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RockShop.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using RockShop.Infrastructure.Data;
 namespace RockShop.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221208172130_AlabamaMigration")]
+    partial class AlabamaMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,15 +230,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "cde8455b-89ab-4e9b-bfd0-8dfca25939aa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7691e88f-50cd-4602-aa4f-98c71b873acb",
+                            ConcurrencyStamp = "ac7d475f-42dc-4059-b6ba-a5baaae323ff",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "user@mail.com",
                             NormalizedUserName = "user@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECSPmhvu9FBtG0bIckAvgbEtM5sVRFBd0U3TloIOQcUHpfmOodK62Ec9sZT/S4ahbg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN+KnxJ3ATiVMEkgyD3DdReUqtNAmxFw1caUJ4emYvNaAiJ8e9m36GUeMERgucP++g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c0d428d8-2879-4f6c-b056-0c4354c1f857",
+                            SecurityStamp = "98d5ffc1-b5bb-43d9-92f0-dc99b5be8390",
                             TwoFactorEnabled = false,
                             UserName = "user@mail.com"
                         },
@@ -244,15 +246,15 @@ namespace RockShop.Infrastructure.Migrations
                         {
                             Id = "f2423455-638c-4558-b7eb-510312d02ef1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b537c31-79d8-4f13-85ff-510446accc55",
+                            ConcurrencyStamp = "49fb3725-c730-4df7-b496-a308d10d87e1",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP2JrbohfglIONlWwXS/ZM+Ymmo+sOFczB/cFZ2gAGLVzflYeAFkxe/5Z4/QaNnbxg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAyl4Bf6ztDVqza9KBAKp1lS222VXudmPN2blBXqnNfBPnVz43BZH+9t8jRLYoN37w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c914120c-7fb2-468b-b161-5ce561582090",
+                            SecurityStamp = "fe409162-7ce3-4059-aba9-9663d5f5e4aa",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -353,25 +355,16 @@ namespace RockShop.Infrastructure.Migrations
 
             modelBuilder.Entity("RockShop.Infrastructure.Data.OrderUserProducts", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("AccountId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AccountId");
+                    b.HasKey("AccountId", "ProductId");
 
                     b.HasIndex("OrderId");
 

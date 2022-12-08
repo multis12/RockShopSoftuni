@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Your Shopping cart";
+    decimal sum = 0;
 }
 
 <h2 class ="text-center">@ViewBag.Title</h2>
@@ -23,8 +24,13 @@
                 <input class="fs-6 btn btn-success mb-3 p-2" type="submit" value="Remove from Cart" />
             </form>
         </div>
+        sum += product.Price;
     }
 <div style="position: absolute; bottom: 150px; right: 300px;">
+    <h6>
+        Total:
+        <b>@String.Format("{0:f2}", sum) BGN</b>
+    </h6>
     <a class="btn-outline-success" asp-area="" asp-controller="Order" asp-action="Checkout">Checkout</a>
  </div>
         

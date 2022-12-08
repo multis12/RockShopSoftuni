@@ -1,4 +1,5 @@
-﻿using RockShop.Infrastructure.Data;
+﻿using RockShop.Core.Models.Order;
+using RockShop.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace RockShop.Core.Contracts
     public interface IOrderService
     {
         Task<IEnumerable<Order>> All();
+
+        Task<int> Checkout(string userId, OrderViewModel model);
     }
 }

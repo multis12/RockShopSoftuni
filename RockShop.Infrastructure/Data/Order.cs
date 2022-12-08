@@ -19,6 +19,8 @@ namespace RockShop.Infrastructure.Data
         [ForeignKey(nameof(AccountId))]
         public AppUser Acc { get; set; }
 
+        public List<OrderUserProducts> OrderUsersProducts { get; set; } = new List<OrderUserProducts>();
+
         [Required]
         [StringLength(30)]
         public string FirstName { get; set; } = null!;
@@ -32,7 +34,7 @@ namespace RockShop.Infrastructure.Data
         public string Address { get; set; } = null!;
 
         [Required]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
     }
 }

@@ -23,11 +23,29 @@ namespace RockShop.Core.Services
             staffService = _staffService;
         }
 
-        public Task<IEnumerable<Order>> All()
+        public async Task<IEnumerable<OrderServiceModel>> All()
         {
-            throw new NotImplementedException();
-        }
+            var result = new List<OrderServiceModel>();
 
+            var products = repo.All<OrderUserProducts>();
+
+           result = await repo.All<Order>()
+                .Where(x => x.IsCompleted == false)
+                .Include(x => x.OrderUsersProducts)
+                .Select(x => new OrderServiceModel()
+                {
+                    Address = x.Address,
+                    FirstName = x.FirstName,
+                    Id = x.Id,
+                    PhoneNumber = x.PhoneNumber,
+                    SecondName = x.SecondName
+
+                }).ToListAsync();
+
+
+            return result;
+
+        }
         public async Task<int> Checkout(string userId, OrderViewModel model)
         {
             var acc = await repo.All<AppUser>()
@@ -42,10 +60,11 @@ namespace RockShop.Core.Services
                 Address = model.Address,
                 PhoneNumber = model.PhoneNumber,
                 Acc = acc,
-                AccountId = userId,                
+                AccountId = userId
             };
             var accProducts = repo.All<CartItem>()
                 .Where(a => a.AccountId == userId);
+
             order.OrderUsersProducts.AddRange(await repo.All<CartItem>()
                 .Where(a => a.AccountId == userId)
                 .Select(a => new OrderUserProducts()

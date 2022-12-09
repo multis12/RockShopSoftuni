@@ -36,5 +36,7 @@ namespace RockShop.Infrastructure.Data
         [Required]
         public string PhoneNumber { get; set; }
 
+        public bool IsCompleted { get; set; } = false;
+
     }
 }

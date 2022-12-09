@@ -1,0 +1,15 @@
+﻿@model List<OrderServiceModel>
+
+@{
+    ViewBag.Title = "All Orders to complete";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    @foreach (var order in Model)
+    {
+        <partial name="_OrderPartial" model="@order" />
+    }
+</div>

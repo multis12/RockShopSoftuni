@@ -1,0 +1,26 @@
+﻿@model OrderServiceModel
+
+<div class="col-md-4">
+    <div class="card mb-3">
+        <div class="card-body text-center">
+            <h4>First name:@Model.FirstName</h4>
+            <h4>Second name:@Model.SecondName</h4>
+            <h4>Adress:@Model.Address</h4>
+            <h4>Phone number:@Model.PhoneNumber</h4>
+                @foreach (var product in Model.OrderProducts)
+            {
+                <partial name="_OrderProductPartial" model="@product"/>
+            }
+            <br />
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                if (this.User.IsInRole(AdminRoleName))
+                {
+                    <a asp-area="" asp-controller="Order" asp-action="Finish" asp-route-id="@Model.Id"
+               class="btn btn-danger">Delete</a>
+                }
+                <p></p>
+            }
+        </div>
+    </div>
+</div>

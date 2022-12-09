@@ -10,7 +10,7 @@ namespace RockShop.Core.Contracts
 {
     public interface IOrderService
     {
-        Task<IEnumerable<Order>> All();
+        Task<IEnumerable<OrderServiceModel>> All();
 
         Task<int> Checkout(string userId, OrderViewModel model);
     }

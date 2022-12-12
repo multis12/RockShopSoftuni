@@ -21,6 +21,13 @@ namespace RockShop.Core.Services
             repo = _repo;
         }
 
+        /// <summary>
+        /// Adds the item to the user's cart
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task AddToCart(int id, string userId)
         {
             var acc = await repo.All<AppUser>()
@@ -52,6 +59,12 @@ namespace RockShop.Core.Services
             }
         }   
 
+        /// <summary>
+        /// Returns all the Products in the cart
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task<IEnumerable<ProductServiceModel>> GetCart(string userId)
         {
             var acc = await repo.AllReadonly<AppUser>()
@@ -77,6 +90,13 @@ namespace RockShop.Core.Services
                 });
         }
 
+        /// <summary>
+        /// Removes the product from the cart
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public async Task RemoveFromCart(int id, string userId)
         {
             var acc = await repo.All<AppUser>()

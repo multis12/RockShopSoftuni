@@ -17,6 +17,10 @@ namespace RockShop.Core.Services
             repo = _repo;
         }
 
+        /// <summary>
+        /// Gets all categories
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ProductCategoryModel>> AllCategories()
         {
             return await repo.AllReadonly<Category>()
@@ -29,6 +33,10 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Gets all types
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ProductTypeModel>> AllTypes()
         {
             return await repo.AllReadonly<Type>()
@@ -41,18 +49,33 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Checks if category exists
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         public async Task<bool> CategoryExists(int categoryId)
         {
             return await repo.AllReadonly<Category>()
                 .AnyAsync(c => c.Id == categoryId);
         }
 
+        /// <summary>
+        /// Checks if type exists
+        /// </summary>
+        /// <param name="typeId"></param>
+        /// <returns></returns>
         public async Task<bool> TypeExists(int? typeId)
         {
             return await repo.AllReadonly<Type>()
                 .AnyAsync(t => t.Id == typeId);
         }
 
+        /// <summary>
+        /// Creates new product
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<int> Create(ProductModel model)
         {
             var product = new Product()
@@ -79,6 +102,10 @@ namespace RockShop.Core.Services
             return product.Id;
         }
 
+        /// <summary>
+        /// Returns last seven products
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ProductIndexModel>> LastSevenProducts()
         {
             return await repo.AllReadonly<Product>()
@@ -94,6 +121,15 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Returns the query model
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="searchTerm"></param>
+        /// <param name="sorting"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="guitarsPerPage"></param>
+        /// <returns></returns>
         public async Task<ProductQueryModel> All(string ? category = null, string? searchTerm = null
             , ProductSorting sorting = ProductSorting.Newest, int currentPage = 1, int guitarsPerPage = 1)
         {
@@ -140,6 +176,10 @@ namespace RockShop.Core.Services
             return result;
         }
 
+        /// <summary>
+        /// Returns all names of the categories
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<string>> AllCategoriesNames()
         {
             return await repo.AllReadonly<Category>()
@@ -148,6 +188,10 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Returns all types names
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<string>> AllTypesNames()
         {
             return await repo.AllReadonly<Type>()
@@ -156,6 +200,11 @@ namespace RockShop.Core.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Return the details for the product
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<ProductDetailsModel> ProductDetailsById(int Id)
         {
             return await repo.AllReadonly<Product>()
@@ -182,12 +231,23 @@ namespace RockShop.Core.Services
                 .FirstAsync();
         }
 
+        /// <summary>
+        /// Checks if the product exists
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<bool> Exists(int Id)
         {
             return await repo.AllReadonly<Product>()
                 .AnyAsync(g => g.Id == Id && g.IsActive);
         }
 
+        /// <summary>
+        /// Edits the product
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task Edit(int productId, ProductModel model)
         {
             var product = await repo.GetByIdAsync<Product>(productId);
@@ -209,16 +269,31 @@ namespace RockShop.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Returns the category Id for the product
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public async Task<int> GetProductCategoryId(int productId)
         {
             return (await repo.GetByIdAsync<Product>(productId)).CategoryId;
         }
 
+        /// <summary>
+        /// Returns the category Id for the product
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public async Task<int?> GetProductTypeId(int productId)
         {
             return (await repo.GetByIdAsync<Product>(productId)).TypeId;
         }
 
+        /// <summary>
+        /// Deletes the product
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public async Task Delete(int productId)
         {
             var product = await repo.GetByIdAsync<Product>(productId);

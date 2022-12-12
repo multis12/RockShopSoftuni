@@ -16,6 +16,11 @@ namespace RockShop.Core.Services
             repo = _repo;
         }
 
+
+        /// <summary>
+        /// Returns all orders
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<OrderServiceModel>> All()
         {
             var result = new List<OrderServiceModel>();
@@ -39,6 +44,13 @@ namespace RockShop.Core.Services
             return result;
 
         }
+
+        /// <summary>
+        /// Clears the current cart and creates new order
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<int> Checkout(string userId, OrderViewModel model)
         {
             var acc = await repo.All<AppUser>()
@@ -81,6 +93,11 @@ namespace RockShop.Core.Services
             return order.Id;
         }
 
+        /// <summary>
+        /// Deletes the order by the given Id
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public async Task Delete(int orderId)
         {
             var order = await repo.All<Order>()
@@ -102,6 +119,11 @@ namespace RockShop.Core.Services
             await repo.SaveChangesAsync();
 
         }
+        /// <summary>
+        /// Returns Details for the order by the Id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public async Task<OrderServiceModel> OrderDetailsById(int Id)
         {
             var result = await repo.AllReadonly<Order>()
@@ -127,6 +149,11 @@ namespace RockShop.Core.Services
 
             return result;
         }
+        /// <summary>
+        /// Checks if the order exists
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> Exists(int id)
         {
             return await repo.AllReadonly<Order>()

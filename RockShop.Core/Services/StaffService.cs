@@ -14,6 +14,12 @@ namespace RockShop.Core.Services
             repo = _repo;
         }
 
+        /// <summary>
+        /// Creates new staff
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public async Task Create(string userId, string phoneNumber)
         {
             var staff = new Staff()
@@ -25,11 +31,21 @@ namespace RockShop.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Checks if the staff exist by the Id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<bool> ExistsById(string userId)
         {
             return await repo.All<Staff>().AnyAsync(a => a.AccountId == userId);
         }
 
+        /// <summary>
+        /// Checks if the Phone number exists in the staff
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
         public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
         {
             return await repo.All<Staff>().AnyAsync(a => a.PhoneNumber == phoneNumber);

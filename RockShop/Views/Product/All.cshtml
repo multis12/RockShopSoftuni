@@ -21,19 +21,6 @@
                 </select>
             </div>
         </div>
-        @*</div>
-            <div class="form-group col-md-3 d-flex justify-content-between">
-            <div class="form-group">
-                <label asp-for="Type"></label>
-                <select asp-for="Type" class="form-control">
-                    <option value="">All</option>
-                    @foreach (var type in Model.Types)
-                    {
-                        <option value="@type">@type</option>
-                    }
-                </select>
-            </div>
-        </div>*@
         <div class="form-group col-md-3">
             <label asp-for="SearchTerm"></label>
             <input asp-for="SearchTerm" class="form-control" placeholder="...">

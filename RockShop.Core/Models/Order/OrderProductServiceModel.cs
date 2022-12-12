@@ -12,13 +12,8 @@ namespace RockShop.Core.Models.Order
 {
     public class OrderProductServiceModel
     {
-        public int Id { get; set; }
-
         public string AccountId { get; set; }
 
         public int ProductId { get; set; }
-
-        [Display(Name = "In Stock")]
-        public bool InStock { get; set; }
     }
 }

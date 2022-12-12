@@ -167,6 +167,7 @@ namespace RockShop.UnitTests
             dbContext = new ApplicationDbContext(options);
             dbContext.Database.EnsureDeleted();
             dbContext.Database.EnsureCreated();
+            dbContext.AddRange(orders);
         }
 
         [Test]
@@ -537,6 +538,33 @@ namespace RockShop.UnitTests
             Assert.That(cartCollection.Any(p => p.AccountId == "f2423455-638c-4558-b7eb-510312d02ef1"
                                            && p.ProductId == 5), !Is.True);
         }
+
+        //[Test]
+        //public async Task TestDeleteOrder()
+        //{
+        //    var repo = new Repository(dbContext);
+        //    orderService = new OrderService(repo);
+
+        //    var orderCollectionBeforeChange = repo.AllReadonly<Order>()
+        //                                    .Where(o => o.IsCompleted == true);
+        //    await orderService.Delete(31);
+
+        //    var orderCollectionAfterChange = repo.AllReadonly<Order>()
+        //                                    .Where(o => o.IsCompleted == true);
+
+        //    Assert.That(orderCollectionBeforeChange, !Is.EqualTo(orderCollectionAfterChange.Count()));
+        //}
+
+        //[Test]
+        //public async Task TestOrderExists()
+        //{
+        //    var repo = new Repository(dbContext);
+        //    orderService = new OrderService(repo);
+
+        //    var exists = await orderService.Exists(27);
+
+        //    Assert.That(exists, Is.True);
+        //}
 
         [TearDown]
         public void TearDown()

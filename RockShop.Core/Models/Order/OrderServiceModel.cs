@@ -14,6 +14,8 @@ namespace RockShop.Core.Models.Order
     {
         public int Id { get; set; }
 
+        public string AccountId { get; set; }
+
         public string FirstName { get; set; } = null!;
 
         public string SecondName { get; set; } = null!;

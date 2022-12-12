@@ -1,0 +1,32 @@
+﻿@model OrderServiceModel
+
+@{
+    ViewBag.Title = "Finish Order";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<form asp-action="Delete">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" disabled="disabled" />
+                <label asp-for="SecondName" class="control-label"></label>
+                <input asp-for="SecondName" class="form-control" disabled="disabled" />
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" disabled="disabled" />
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" disabled="disabled" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Delete" class="btn btn-primary" />
+            </div>
+            @foreach (var orderProduct in Model.OrderProducts)
+            {
+                <partial name="_OrderProductPartial" model="@orderProduct" />
+            }
+        </div>
+    </div>
+</form>

@@ -11,12 +11,10 @@ namespace RockShop.Core.Services
     public class ProductService : IProductService
     {
         private readonly IRepository repo;
-        private readonly IStaffService staffService;
 
-        public ProductService(IRepository _repo, IStaffService _staffService)
+        public ProductService(IRepository _repo)
         {
             repo = _repo;
-            staffService = _staffService;
         }
 
         public async Task<IEnumerable<ProductCategoryModel>> AllCategories()
@@ -124,7 +122,7 @@ namespace RockShop.Core.Services
                 _ => products.OrderByDescending(g => g.Id)
             };
 
-            result.Guitars = await products
+            result.Products = await products
                 .Skip((currentPage - 1) * guitarsPerPage)
                 .Take(guitarsPerPage)
                 .Select(g => new ProductServiceModel()
@@ -137,7 +135,7 @@ namespace RockShop.Core.Services
                 })
                 .ToListAsync();
 
-            result.TotalGuitarsCount = await products.CountAsync();
+            result.TotalProductsCount = await products.CountAsync();
 
             return result;
         }

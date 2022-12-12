@@ -2,8 +2,8 @@
 {
     public class ProductQueryModel
     {
-        public int TotalGuitarsCount { get; set; }
+        public int TotalProductsCount { get; set; }
 
-        public IEnumerable<ProductServiceModel> Guitars { get; set; } = new List<ProductServiceModel>();
+        public IEnumerable<ProductServiceModel> Products { get; set; } = new List<ProductServiceModel>();
     }
 }

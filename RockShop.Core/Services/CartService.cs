@@ -15,12 +15,10 @@ namespace RockShop.Core.Services
     {
   
         private readonly IRepository repo;
-        private readonly IStaffService staffService;
 
-        public CartService(IRepository _repo, IStaffService _staffService)
+        public CartService(IRepository _repo)
         {
             repo = _repo;
-            staffService = _staffService;
         }
 
         public async Task AddToCart(int id, string userId)

@@ -34,9 +34,9 @@ namespace RockShop.Controllers
                 query.CurrentPage,
                 AllProductsQueryModel.ProductsPerPage);
 
-            query.TotalProductsCount = result.TotalGuitarsCount;
+            query.TotalProductsCount = result.TotalProductsCount;
             query.Categories = await productService.AllCategoriesNames();
-            query.Products = result.Guitars;
+            query.Products = result.Products;
 
             return View(query);
         }

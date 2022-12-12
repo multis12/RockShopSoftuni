@@ -1,26 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RockShop.Core.Contracts;
 using RockShop.Core.Models.Order;
-using RockShop.Core.Models.Product;
 using RockShop.Infrastructure.Data;
 using RockShop.Infrastructure.Data.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RockShop.Core.Services
 {
     public class OrderService : IOrderService
     {
         private readonly IRepository repo;
-        private readonly IStaffService staffService;
 
-        public OrderService(IRepository _repo, IStaffService _staffService)
+        public OrderService(IRepository _repo)
         {
             repo = _repo;
-            staffService = _staffService;
         }
 
         public async Task<IEnumerable<OrderServiceModel>> All()

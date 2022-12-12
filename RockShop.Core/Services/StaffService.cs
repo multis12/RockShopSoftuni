@@ -30,12 +30,6 @@ namespace RockShop.Core.Services
             return await repo.All<Staff>().AnyAsync(a => a.AccountId == userId);
         }
 
-        //TODO: IMPLEMENT SHOPPING CART!
-        //public Task<bool> UserHasGuitar(string userId)
-        //{
-        //    return await repo.All<Staff>().AnyAsync(a => a.R == phoneNumber); 
-        //}
-
         public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
         {
             return await repo.All<Staff>().AnyAsync(a => a.PhoneNumber == phoneNumber);

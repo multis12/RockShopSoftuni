@@ -34,7 +34,7 @@ namespace RockShop.Infrastructure.Data
         public string Address { get; set; } = null!;
 
         [Required]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = null!;
 
         public bool IsCompleted { get; set; } = false;
 
